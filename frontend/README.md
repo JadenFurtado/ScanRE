@@ -1,1 +1,6 @@
 - [ ] Login page
+- [ ] New scan (link to repo)
+- [ ] List previous scans
+- [ ] Show current scan progress
+- [ ] Show output (Graphs, Vulnerabilities identified, repo health, etc)
+- [ ] Navbar
