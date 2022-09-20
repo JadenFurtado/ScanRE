@@ -1,6 +1,6 @@
 - [ ] Login page
-- [ ] New scan (link to repo)
-- [ ] List previous scans
-- [ ] Show current scan progress
-- [ ] Show output (Graphs, Vulnerabilities identified, repo health, etc)
 - [ ] Navbar
+- [ ] New scan (link to repo. 2 input fields: link to repo/directory of code, Scan name)
+- [ ] History of previous scans (scan names, scan score, scan status, date started/finished)
+- [ ] Show current scan progress (vulnerabilities idetified thus far, % of completion)
+- [ ] Show output (Graphs, Vulnerabilities identified, repo health, etc)
