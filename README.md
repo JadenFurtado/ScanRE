@@ -15,3 +15,5 @@ Version 1.1:
 * Scan open source code for malware and flag suspicious libraries/modules (only if required)
 * Integrate with Npm and Pip
 * NLP/ML/AI?
+
+https://docs.google.com/presentation/d/1zhLFyvWoOnCP4tVwOZqFfd2Ho8dcUqIt0-lUR0LDY7A/edit#slide=id.p
