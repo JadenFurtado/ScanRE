@@ -21,3 +21,6 @@ def listScans():
 def getScanData(scanId):
     return "scan Data"
 
+@app.route("/test")
+def testFunction():
+    return "server is running"

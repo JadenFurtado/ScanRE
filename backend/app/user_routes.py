@@ -1,6 +1,7 @@
 from app import app
 from flask import Flask
-from app.semgrepController import Semgrep
+from app.Controllers import Semgrep
+from flask import request
 # returns the login page
 @app.route("/login")
 def userLogin():
@@ -18,3 +19,8 @@ def userLogout():
 def userProfile():
     return "profile"
 
+@app.route("/",methods = ["POST"])
+def requestD():
+    print(request.data)
+    print(request.form)
+    return "profile"
