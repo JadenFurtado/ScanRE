@@ -1,1 +1,5 @@
 .code-workspace.code-workspace
+/asynctest
+.env
+sha256cal.py
+Scanner/
