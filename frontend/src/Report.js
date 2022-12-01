@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -13,34 +13,30 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function FormRow() {
-    return (
-    <React.Fragment>
-      <Grid item xs={2}>
-        <Item></Item>
+let items = [<VulnChart />,'Vulnerability List'];
+let itemList = [];
+items.forEach((item, index) => {
+  itemList.push(
+    <Grid container spacing={1} key={index}>
+      <Grid container item spacing={3}>
+        <React.Fragment>
+          <Grid item xs={2}>
+            <Item></Item>
+          </Grid>
+          <Grid item xs={9}>
+            <Item>{item}</Item>
+          </Grid>
+        </React.Fragment>
       </Grid>
-      <Grid item xs={9}>
-        <Item>Report part</Item>
-      </Grid>
-    </React.Fragment>
-  );
-}
+    </Grid>
+  )
+})
 
 export default function Report() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
-        <Grid container item spacing={3}>
-          <FormRow />
-        </Grid>
-        <Grid container item spacing={3}>
-          <FormRow />
-        </Grid>
-        <Grid container item spacing={3}>
-          <FormRow />
-        </Grid>
-      </Grid>
-    </Box>
+      {itemList}
+    </Box >
   );
 }
 
