@@ -1,14 +1,20 @@
 import './App.css';
-import Navbar from './components/Navbar';
-import Login from './Login';
-import Report from './Report';
+//import Login from './Login';
+import Report from './pages/Report';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Navbar></Navbar>
-      <h1>REACT</h1>
-      <Report></Report>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/report' element={<Report />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

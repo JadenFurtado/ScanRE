@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import VulnChart from './components/VulnChart';
-
+import VulnChart from '../components/VulnChart';
+import ResponsiveAppBar from '../components/ResponsiveAppBar';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -34,9 +34,12 @@ items.forEach((item, index) => {
 
 export default function Report() {
   return (
+    <>
+    <ResponsiveAppBar />
     <Box sx={{ flexGrow: 1 }}>
       {itemList}
     </Box >
+    </>
   );
 }
 
