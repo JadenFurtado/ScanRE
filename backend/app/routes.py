@@ -16,9 +16,8 @@ logger = get_task_logger(__name__)
 celery = Celery(app.name, broker=app.config["CELERY_BROKER_URL"])
 celery.conf.update(app.config)
 
-
 @celery.task()
-def scan(repositoryLink,path,repositoryName):
+def scan(repositoryLink,path,repositoryName,finalOutput):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput)
@@ -27,10 +26,10 @@ def scan(repositoryLink,path,repositoryName):
     loop.run_until_complete(scanObj.cleanUp())
     return "success"
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def add_task():
-    repositoryLink = request.get.args("repositoryLink")
-    path = request.get.args("path")
+    repositoryLink = request.args.get("repositoryLink")
+    path = request.args.get("path")
     repositoryName = request.args.get("repositoryName")
     finalOutput = request.args.get("finalOutput")
     scan.delay(repositoryLink,path,repositoryName,finalOutput)
