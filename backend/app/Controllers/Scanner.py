@@ -23,13 +23,8 @@ class CodeScanner:
     # scan code using semgrep
     async def scanCode(self):
         try:
-            #os.system('docker run --rm -v "'+self.path+'/'+self.repoName+':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
-            # f = open(self.path+"/"+self.repoName+'.json')
-            # data = json.load(f)
-            # with open(self.scanResultPath, 'a',encoding='utf-8') as dumpFile:
-            #     json.dump(data, dumpFile,ensure_ascii=False, indent=4)
-            # f.close()
-            os.system('mv /home/jaden/projects/temp/wp-redis/output.json /home/jaden/projects/output.json')
+            os.system('docker run --rm -v "'+self.path+'/'+self.repoName+':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
+            os.system('mv '+self.path+'/'+self.repoName+'/output.json '+self.scanResultPath+'/'+self.repoName+'.json')
             return "success"
         except:
             print("error")
