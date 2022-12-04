@@ -43,7 +43,7 @@ def add_task():
     repositoryLink = request.args.get("repositoryLink")
     repoLink = "https://TsecBeProject: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@github.com/JadenFurtado/geoAbuseIPDB.git"
     path = request.args.get("path")
-    path = "D:/test/"
+    path = "test/"
     repositoryName = request.args.get("repositoryName")
     repoName = "geoAbuseIPDB"
     scan.delay(repositoryLink,path,repositoryName)

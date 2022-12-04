@@ -21,9 +21,9 @@ def scan(repositoryLink,path,repositoryName,finalOutput):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput)
-    loop.run_until_complete(scanObj.getCode())
+    #loop.run_until_complete(scanObj.getCode())
     loop.run_until_complete(scanObj.scanCode())
-    loop.run_until_complete(scanObj.cleanUp())
+    #loop.run_until_complete(scanObj.cleanUp())
     return "success"
 
 @app.route('/',methods=['GET','POST'])
