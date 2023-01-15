@@ -121,7 +121,7 @@ function ResponsiveAppBar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <NavLink to={'/'+page} style={{color:'white',textDecoration:'none'}}>{page}</NavLink>
               </Button>
             ))}
           </Box>

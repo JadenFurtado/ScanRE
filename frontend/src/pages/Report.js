@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import VulnChart from '../components/VulnChart';
+import VulnLines from '../components/VulnLines';
+
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -13,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-let items = [<VulnChart />,'Vulnerability List'];
+let items = [<VulnChart />,'Vulnerability List',<VulnLines />,'Vulnerability Lines'];
 let itemList = [];
 items.forEach((item, index) => {
   itemList.push(
