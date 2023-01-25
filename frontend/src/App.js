@@ -6,6 +6,7 @@ import { Reflector, Text, useTexture, useGLTF } from '@react-three/drei'
 import Report from './pages/Report';
 import Login from './pages/Login';
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import Scan from './pages/Scan';
 
 function HomePage() {
   return (
@@ -68,6 +69,8 @@ function Intro() {
           <Route path='/' element={<HomePage />} />
            <Route path='/login' element={<Login />} />
            <Route path='/Reports' element={<Report />} />
+           <Route path='/Scans' element={<Scan />} />
+           <Route path='/reports/:reportNumber' element={<Report />} />
          </Routes>
        </BrowserRouter>
      </div>

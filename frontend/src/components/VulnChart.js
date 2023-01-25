@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { Chart } from "react-google-charts";
 
 function VulnChart(){
     return (
-        <img sx={{display:'flex',maxHeight: { xs: 233, md: 167 },
-        maxWidth: { xs: 350, md: 250 },}} src={require('./Pie-Charts.jpg')}></img>
+        <Chart chartType='ScatterChart' data={[['Severity','Language'],[1,10],[20,10]]} width="100%" height="20vh" />    
         )
   }
   
