@@ -3193,8 +3193,8 @@ export default function Report() {
                 <Typography align='center' padding={2} color="black" backgroundColor="white" fontSize={30}>Findings</Typography>
             </Box >
             <Divider component="li" variant="inset" />
-            <Box sx={{ flexGrow: 1 }} padding={5}>
-                {resultList}
+            <Box sx={{ flexGrow: 1, overflow:'auto', maxHeight:'100%', overflowY:'auto',display: "flex",flexDirection: "column" }} padding={5}>
+                <Paper sx={{ flexGrow: 1, overflow:'auto', maxHeight:'100%', overflowY:'auto',display: "flex",flexDirection: "column" }}>{resultList}</Paper>
             </Box >
         </>
     );
