@@ -26,6 +26,16 @@ def scan(repositoryLink,path,repositoryName,finalOutput):
     loop.run_until_complete(scanObj.cleanUp())
     return "success"
 
+@celery.task()
+def deepScan(repositoryLink,path,repositoryName,finalOutput):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput)
+    loop.run_until_complete(scanObj.getCode())
+    loop.run_until_complete(scanObj.scanWithORTandDeepSemgrep())
+    loop.run_until_complete(scanObj.cleanUp())
+    return "success"
+
 @app.route('/',methods=['GET','POST'])
 def add_task():
     repositoryLink = request.args.get("repositoryLink")
@@ -33,4 +43,13 @@ def add_task():
     repositoryName = request.args.get("repositoryName")
     finalOutput = request.args.get("finalOutput")
     scan.delay(repositoryLink,path,repositoryName,finalOutput)
+    return jsonify({'status': 'ok'})
+
+@app.route('/deepScan', methods=['GET','POST'])
+def add_ort():
+    repositoryLink = request.args.get("repositoryLink")
+    path = request.args.get("path")
+    repositoryName = request.args.get("repositoryName")
+    finalOutput = request.args.get("finalOutput")
+    deepScan.delay(repositoryLink,path,repositoryName,finalOutput)
     return jsonify({'status': 'ok'})
