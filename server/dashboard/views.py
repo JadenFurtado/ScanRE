@@ -18,4 +18,5 @@ def scanResult(request):
         return render(request,'scan/index.html',{'results':results,'scanName':scanName})
 
 def newScan(request):
+    
     return render(request,'scan/newScan.html')
