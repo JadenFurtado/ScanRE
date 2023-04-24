@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/52862591/234078731-eeb0144e-e945-435c-a865-e8e724d5d32b.png)
 
-A static code analysis toolkit built as a wrapper around SemGrep, ORT and other tools
+## A static code analysis toolkit built as a wrapper around SemGrep, ORT and other tools
 
 ### Prerequisits:
 System having 8Gb RAM
