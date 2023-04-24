@@ -81,10 +81,18 @@ php -S 0.0.0.0:5555
 ```
 ## Architecture:
 
+A high level layout of our system is shown below.
+
 ![image](https://user-images.githubusercontent.com/52862591/234079664-1aa1abee-299b-4b78-bbee-e027da26119a.png)
 
-What was our motivation?
+We've made extensive use of docker and celery to ensure that we are able to tackle the asynchronous nature of our task, i.e. scanning multiple files of code, each having different sizes across multiple repositories. A high level architecture of celery is shown below.
+
+![image](https://user-images.githubusercontent.com/52862591/234092040-96c81c14-4282-4426-9d53-5897d354c4e6.png)
+
+
+#What was our motivation?
 To help improve the security posture of open sourced software in the industry
+
 ![image](https://user-images.githubusercontent.com/52862591/234079995-43c5a83b-a1cc-420b-838c-1f0e86343d93.png)
 
 We were inspired by the work showcased in NullCon22, Asia's largest cybersecurity conference. Links to the talks in the references section.
