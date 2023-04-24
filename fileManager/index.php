@@ -1355,9 +1355,12 @@ if (isset($_GET['upload']) && !FM_READONLY) {
                     <div id="js-url-upload__list" class="col-9 mt-3"></div>
                 </div>
                 <div class="upload-url-wrapper card-tabs-container hidden" id="gitUploader">
-                    <form id="js-form-url-upload" class="row row-cols-lg-auto g-3 align-items-center" method="POST" action="http://127.0.0.1:5000/">
+                    <form id="js-form-url-upload" class="row row-cols-lg-auto g-3 align-items-center" method="GET" action="http://127.0.0.1:5000/">
                         <input type="hidden" name="type" value="upload" aria-label="hidden" aria-hidden="true">
                         <input type="url" placeholder="URL" name="repositoryLink" required class="form-control" style="width: 80%">
+                        <input type="text" placeholder="Repository Name" name="repositoryName" required class="form-control" style="width: 80%">
+                        <input type="text" placeholder="Output" name="finalOutput" required class="form-control" style="width: 80%">
+                        <input type="text" placeholder="Clone path" name="path" required class="form-control" style="width: 80%">
                         <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
                         <button type="submit" class="btn btn-primary ms-3"><?php echo lng('Upload') ?></button>
                         <div class="lds-facebook"><div></div><div></div><div></div></div>

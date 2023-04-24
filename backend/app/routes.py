@@ -17,13 +17,14 @@ celery = Celery(app.name, broker=app.config["CELERY_BROKER_URL"])
 celery.conf.update(app.config)
 
 @celery.task()
-def scan(repositoryLink,path,repositoryName,finalOutput,multipleDirectories):
+def scan(repositoryLink,path,repositoryName,finalOutput,multipleDirectories=0):
     if multipleDirectories==0:
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput)
         loop.run_until_complete(scanObj.getCode())
         loop.run_until_complete(scanObj.scanCode())
+        loop.run_until_complete(scanObj.importScanData())
         loop.run_until_complete(scanObj.cleanUp())
         return "success"
     else:
@@ -45,7 +46,7 @@ def add_task():
     return jsonify({'status': 'ok'})
 
 @app.route('/scan',methods=['GET','POST'])
-def add_task():
+def add_new_task():
     repositoryLink = request.args.get("repositoryLink")
     path = request.args.get("paths")
     repositoryName = request.args.get("repositoryName")

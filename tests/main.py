@@ -16,10 +16,11 @@ def importScanData(filePath):
     r = requests.post(
         "http://127.0.0.1:8080/api/v2/import-scan/", files=files, data=values,headers=headers)
     print(r.text)
-
+"""
 fileRes= open('/home/jaden/projects/results/1k/results/out.txt','r')
 for file in fileRes:
     file = file.strip()
     print("[*] "+file)
-    importScanData("/home/jaden/projects/results/1k/results/"+file)
-    print()
+"""
+importScanData("/home/jaden/projects/temp/DVWA.json")
+# print()
