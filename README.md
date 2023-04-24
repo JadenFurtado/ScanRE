@@ -90,7 +90,7 @@ We've made extensive use of docker and celery to ensure that we are able to tack
 ![image](https://user-images.githubusercontent.com/52862591/234092040-96c81c14-4282-4426-9d53-5897d354c4e6.png)
 
 
-#What was our motivation?
+# What was our motivation?
 To help improve the security posture of open sourced software in the industry
 
 ![image](https://user-images.githubusercontent.com/52862591/234079995-43c5a83b-a1cc-420b-838c-1f0e86343d93.png)
