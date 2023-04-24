@@ -4,6 +4,16 @@
 
 ## A static code analysis toolkit built as a wrapper around SemGrep, ORT and other tools
 
+## What is Static Code Analysis?
+
+Static analysis is a method of debugging that is done by automatically examining the source code without having to execute the program. This provides developers with an understanding of their code base and helps ensure that it is compliant, safe, and secure. To find defects and violations of policies, checkers perform an analysis on the code.
+
+![image](https://user-images.githubusercontent.com/52862591/234088790-64ded29a-f35e-4b25-a862-c59dced2fd71.png)
+
+They operate by querying or traversing the model, looking for particular properties or patterns that indicate defects. Sophisticated symbolic execution techniques explore paths through a control-flow graph. The data structure representing paths that might be traversed by a program during its execution. A warning is generated, if the path exploration notices an anomaly.
+
+To model and explore the astronomical number of combinations of circumstances, scanners employ a variety of strategies to ensure scalability. For example, procedures summaries are refined and compacted during the analysis, and paths are explored in an order that minimizes paging. 
+
 ### Prerequisits:
 System having 8Gb RAM
 ,Linux/Windows (We recommend running the code in Linux)
