@@ -1,4 +1,4 @@
-The CLI can be found <a href="https://github.com/JadenFurtado/ScanRE">Here</a>
+The CLI can be found at https://github.com/JadenFurtado/scanRE_CLI
 
 Documentation:
 
