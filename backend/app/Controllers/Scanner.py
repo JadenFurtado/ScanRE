@@ -15,8 +15,6 @@ class CodeScanner:
 
     # clone code from source repository
     async def getCode(self):
-        os.system('git clone '+self.repoLink+" " +
-                  self.path+"/"+self.repoName+"/")
         try:
             os.system('git clone '+self.repoLink+" " +
                       self.path+"/"+self.repoName+"/")
