@@ -30,8 +30,7 @@ Navigate to the backend directory
 
 For both Windows and Linux, you can start a virtualenvironment using: 
 ```
-pip install virtualenv
-virtualenv start myenv
+python3 -m venv myenv
 source myenv/bin/activate
 ```
 
