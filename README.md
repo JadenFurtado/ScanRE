@@ -16,10 +16,11 @@ To model and explore the astronomical number of combinations of circumstances, s
 
 ### Prerequisits:
 System having 8Gb RAM
-,Linux/Windows (We recommend running the code in Linux)
-,Docker
-,Git
-Python3 and pip
+, Linux/Windows (We recommend running the code in Linux)
+, Docker
+, Git
+, Python3 and pip
+, PHP
 
 ## Getting started!
 
