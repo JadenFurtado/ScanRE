@@ -15,4 +15,6 @@ flask run
 
 * step 3: Start the celery workers:
 
+```
 celery -A app.routes.celery worker --loglevel=info -P gevent
+```

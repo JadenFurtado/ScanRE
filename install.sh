@@ -18,9 +18,14 @@ if [[ $input == "1" ]]; then
 
     cd SOARtool && ./dc-build.sh
 else
+    # should the bash script fail(for any given reason!), you can manually start ScanRE's components using the below commands in the respective directories
     echo "[*] Start the backend" &
 
     cd backend && ./start.sh &
+
+    echo "[*] Starting SOAR example" &
+
+    cd SOARexample && ./dc-up.sh postgres-redis
 
     echo "[*] Starting Django server" &
 
@@ -30,7 +35,5 @@ else
 
     cd fileManager && php -S 0.0.0.0:5555
 
-    echo "[*] Starting SOAR example" &
-
-    cd SOARexample && ./dc-up.sh postgres-redis
 fi
+# We were unable to merge all files into a single executable given the complexity of the code!
