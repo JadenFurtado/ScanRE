@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i!s$q40_^13n!q6t1fihv0elyf0220jdcuhld=$-ywzqxmy(2*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['scanre2.loca.lt',"localhost:8000","localhost","192.168.43.161"]
 
 
 # Application definition
