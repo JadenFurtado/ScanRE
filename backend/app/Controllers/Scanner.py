@@ -13,7 +13,7 @@ class CodeScanner:
         self.repoName = repoName
         self.scanResultPath = scanResultPath
         self.ortPath = ortPath
-        self.GOPATH = goPath
+        # self.GOPATH = goPath
     # clone code from source repository
     async def getCode(self):
         try:
@@ -51,18 +51,18 @@ class CodeScanner:
 
             #Ubuntu variables
             ORTpath = self.ortPath
-            GOPATH = self.GOPATH
-            GoClonePath = GOPATH +'/src/k8s.io/'
+            # GOPATH = self.GOPATH
+            # GoClonePath = GOPATH +'/src/k8s.io/'
             repoNamed = self.repoName
             clonePath = self.path
-            #This is specifically for go code (Figure out how to recognize)
-            os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+ clonePath + repoNamed +'/ORTAnalyzerOutput -f JSON')
+            #This is specifically for go code (Figure out how to recognize) #Currently not supported
+            # os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+ clonePath + repoNamed +'/ORTAnalyzerOutput -f JSON')
             #This command runs the ORT analyzer on the codeORTpath = '/home/complab304pc30/Documents/Group20/ort/cli/build/install/ort/bin/'
-            #os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+clonePath + repoNamed +'ORTAnalyzerOutput -f JSON')
+            os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+clonePath + repoNamed +'ORTAnalyzerOutput -f JSON')
             #This command downloads all the dpendencies of the code
-            #os.system(ORTpath + 'ort download -i '+clonePath+ repoNamed+'ORTAnalyzerOutput/analyzer-result.json -o '+ clonePath+ repoNamed+'ORTDownloadOutput')
+            os.system(ORTpath + 'ort download -i '+clonePath+ repoNamed+'ORTAnalyzerOutput/analyzer-result.json -o '+ clonePath+ repoNamed+'ORTDownloadOutput')
             # docker run --rm -v "C:/Users/complab304pc31/Documents/Group20/ScannedRepos/mime-types:/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json
-            #os.system('docker run --rm -v "'+clonePath+ repoNamed+'ORTDownloadOutput'+':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
+            os.system('docker run --rm -v "'+clonePath+ repoNamed+'ORTDownloadOutput'+':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
             return "success"
         except:
             print("error with ORT")
@@ -77,55 +77,6 @@ class CodeScanner:
         except:
             return "failed"
 
-<<<<<<< HEAD
-    async def importScanData(self):
-        files = {'file': open(self.scanResultPath+'/' +
-                              self.repoName+'.json', 'rb')}
-        values = {
-            "scan_date": "2023-04-15",
-            "minimum_severity": "Info",
-            "active": True,
-            "verified": True,
-            "scan_type": "Semgrep JSON Report",
-            "source_code_management_uri": self.repoLink,
-            "engagement": 1,
-            "engagement_id": 1,
-            "product_id": 2
-        }
-        headers = {"Authorization": "Token "+os.getenv("TOKEN")+""}
-        r = requests.post(
-            str(os.getenv("DOJOURL"))+"api/v2/import-scan/", files=files, data=values, headers=headers)
-        print(r.text)
-
-    async def scanFiles(self, directoryArr):
-        for directory in directoryArr:
-            try:
-                os.system('docker run --rm -v "'+directory +
-                          ':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
-                os.system('mv '+directory+'/output.json ' +
-                          self.scanResultPath+'/'+self.repoName+'.json')
-                files = {'file': open(
-                    self.scanResultPath+'/'+self.repoName+'.json', 'rb')}
-                values = {
-                    "scan_date": "2023-04-15",
-                    "minimum_severity": "Info",
-                    "active": True,
-                    "verified": True,
-                    "scan_type": "Semgrep JSON Report",
-                    "source_code_management_uri": URL,
-                    "engagement": 1,
-                    "engagement_id": 1,
-                    "product_id": 2
-                }
-                headers = {"Authorization": "Token "+os.getenv("TOKEN")+""}
-                r = requests.post(
-                    str(os.getenv("DOJOURL"))+"api/v2/import-scan/", files=files, data=values, headers=headers)
-                print(r.text)
-                return "success"
-            except:
-                print("error")
-                return "failed"
-=======
 if __name__=='__main__':
     repoLink = "https://github.com/kubernetes/kubernetes.git"
     repoName = "kubernetes"
@@ -137,4 +88,3 @@ if __name__=='__main__':
     Scanner = CodeScanner(repoLink,path,repoName,scanResultPath,ortPath,goPath)
     #asyncio.run(Scanner.getCode())
     asyncio.run(Scanner.scanWithORTandDeepSemgrep())
->>>>>>> 7525652d630a0502340f73c4159e73dd18c61978
