@@ -7,7 +7,7 @@ import requests
 
 
 class CodeScanner:
-    def __init__(self,repoLink,path,repoName,scanResultPath,ortPath,goPath):
+    def __init__(self,repoLink,path,repoName,scanResultPath,ortPath):
         self.repoLink=repoLink
         self.path=path
         self.repoName = repoName
@@ -58,11 +58,13 @@ class CodeScanner:
             #This is specifically for go code (Figure out how to recognize) #Currently not supported
             # os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+ clonePath + repoNamed +'/ORTAnalyzerOutput -f JSON')
             #This command runs the ORT analyzer on the codeORTpath = '/home/complab304pc30/Documents/Group20/ort/cli/build/install/ort/bin/'
-            os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+clonePath + repoNamed +'ORTAnalyzerOutput -f JSON')
+            #os.system(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+clonePath + repoNamed +'ORTAnalyzerOutput -f JSON')
+            print(ORTpath + 'ort --debug --stacktrace -P ort.analyzer.allowDynamicVersions=true analyze -i '+ clonePath + repoNamed +' -o '+clonePath + repoNamed +'ORTAnalyzerOutput -f JSON')
+            print(clonePath + repoNamed +'ORTAnalyzerOutput')
             #This command downloads all the dpendencies of the code
-            os.system(ORTpath + 'ort download -i '+clonePath+ repoNamed+'ORTAnalyzerOutput/analyzer-result.json -o '+ clonePath+ repoNamed+'ORTDownloadOutput')
+            # os.system(ORTpath + 'ort download -i '+clonePath+ repoNamed+'ORTAnalyzerOutput/analyzer-result.json -o '+ clonePath+ repoNamed+'ORTDownloadOutput')
             # docker run --rm -v "C:/Users/complab304pc31/Documents/Group20/ScannedRepos/mime-types:/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json
-            os.system('docker run --rm -v "'+clonePath+ repoNamed+'ORTDownloadOutput'+':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
+            # os.system('docker run --rm -v "'+clonePath+ repoNamed+'ORTDownloadOutput'+':/src" returntocorp/semgrep semgrep --config=auto --output=output.json --json --verbose')
             return "success"
         except:
             print("error with ORT")
@@ -78,13 +80,12 @@ class CodeScanner:
             return "failed"
 
 if __name__=='__main__':
-    repoLink = "https://github.com/kubernetes/kubernetes.git"
-    repoName = "kubernetes"
-    scanResultPath = ""
-    ortPath = '/home/jaden/projects/ort/cli/build/install/ort/bin/'
+    repoLink = "https://github.com/django/django"
+    repoName = "django"
+    scanResultPath = repoName + "Result"
+    ortPath = '/home/unixusername/BEProject/ort/cli/build/install/ort/bin/'
     goPath ="/usr/local/go"
-    repoNamed = 'kubernetes'
-    path = '/home/jaden/projects/temp/'
-    Scanner = CodeScanner(repoLink,path,repoName,scanResultPath,ortPath,goPath)
-    #asyncio.run(Scanner.getCode())
+    path = '/home/unixusername/clonedProjects/'
+    Scanner = CodeScanner(repoLink,path,repoName,scanResultPath,ortPath)
+    asyncio.run(Scanner.getCode())
     asyncio.run(Scanner.scanWithORTandDeepSemgrep())
