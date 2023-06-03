@@ -1,6 +1,6 @@
 <?php
 //Default Configuration
-$CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":true,"hide_Cols":false,"theme":"light"}';
+$CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":true,"hide_Cols":false,"theme":"dark"}';
 
 /**
  * H3K | Tiny File Manager V2.5.3
@@ -322,7 +322,7 @@ if ($use_auth) {
             if (isset($auth_users[$_POST['fm_usr']]) && isset($_POST['fm_pwd']) && password_verify($_POST['fm_pwd'], $auth_users[$_POST['fm_usr']]) && verifyToken($_POST['token'])) {
                 $_SESSION[FM_SESSION_ID]['logged'] = $_POST['fm_usr'];
                 fm_set_msg(lng('You are logged in'));
-                fm_redirect("http://localhost:8000/history");
+                fm_redirect("http://scanre4.loca.lt/");
             } else {
                 unset($_SESSION[FM_SESSION_ID]['logged']);
                 fm_set_msg(lng('Login failed. Invalid username or password'), 'error');
@@ -1322,10 +1322,10 @@ if (isset($_GET['upload']) && !FM_READONLY) {
                         <a class="nav-link active" href="#fileUploader" data-target="#fileUploader"><i class="fa fa-arrow-circle-o-up"></i> <?php echo lng('UploadingFiles') ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#urlUploader" class="js-url-upload" data-target="#urlUploader"><i class="fa fa-link"></i> <?php echo lng('Upload from URL') ?></a>
-                    </li>
+                        <a class="nav-link" href="#urlUploader" class="js-url-upload" data-target="#urlUploader"><i class="fa fa-link"></i> <?php echo lng('Scan from URL') ?></a>
+                    </li> 
                     <li class="nav-item">
-                    <a class="nav-link" href="#gitUploader" class="js-url-upload" data-target="#gitUploader"><i class="fa fa-link"></i> <?php echo lng('Upload from Git') ?></a>
+                    <a class="nav-link" href="#gitUploader" class="js-url-upload" data-target="#gitUploader"><i class="fa fa-link"></i> <?php echo lng('Scan from Git') ?></a>
                     </li>
                 </ul>
             </div>
@@ -1355,7 +1355,7 @@ if (isset($_GET['upload']) && !FM_READONLY) {
                     <div id="js-url-upload__list" class="col-9 mt-3"></div>
                 </div>
                 <div class="upload-url-wrapper card-tabs-container hidden" id="gitUploader">
-                    <form id="js-form-url-upload" class="row row-cols-lg-auto g-3 align-items-center" method="GET" action="http://127.0.0.1:5000/">
+                    <form id="js-form-url-upload" class="row row-cols-lg-auto g-3 align-items-center" method="GET" action="http://scanre3.local.lt/">
                         <input type="hidden" name="type" value="upload" aria-label="hidden" aria-hidden="true">
                         <input type="url" placeholder="URL" name="repositoryLink" required class="form-control" style="width: 80%">
                         <input type="text" placeholder="Repository Name" name="repositoryName" required class="form-control" style="width: 80%">

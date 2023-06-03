@@ -1,13 +1,15 @@
 from app import app
 from flask import jsonify
-from flask import Flask, request
+from flask import Flask, request, Response
 from celery import Celery
 from app.Controllers.Scanner import CodeScanner
 from celery.utils.log import get_task_logger
 import os
-# from dotenv import load_dotenv
+import json
+from dotenv import load_dotenv
 import asyncio
-
+import validators
+from flask import Flask,session,render_template,request,redirect,url_for
 # load_dotenv()
 logger = get_task_logger(__name__)
 
@@ -16,25 +18,15 @@ logger = get_task_logger(__name__)
 celery = Celery(app.name, broker=app.config["CELERY_BROKER_URL"])
 celery.conf.update(app.config)
 
-@celery.task()
+#@celery.task()
 def scan(repositoryLink,path,repositoryName,finalOutput,multipleDirectories=0):
-    if multipleDirectories==0:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput)
-        loop.run_until_complete(scanObj.getCode())
-        loop.run_until_complete(scanObj.scanCode())
-        loop.run_until_complete(scanObj.importScanData())
-        loop.run_until_complete(scanObj.cleanUp())
-        return "success"
-    else:
-        for directory in path:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput,ortPath,goPath)
-            loop.run_until_complete(scanObj.getCode())
-            loop.run_until_complete(scanObj.scanCode())
-        return "success"
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    scanObj = CodeScanner(repositoryLink,path,repositoryName,finalOutput)
+    loop.run_until_complete(scanObj.getCode())
+    loop.run_until_complete(scanObj.scanCode())
+    loop.run_until_complete(scanObj.cleanUp())
+    return "success"
 
 @celery.task()
 def deepScan(repositoryLink,path,repositoryName,finalOutput,ortPath):
@@ -48,21 +40,39 @@ def deepScan(repositoryLink,path,repositoryName,finalOutput,ortPath):
 
 @app.route('/',methods=['GET','POST'])
 def add_task():
-    repositoryLink = request.args.get("repositoryLink")
-    path = request.args.get("path")
-    repositoryName = request.args.get("repositoryName")
-    finalOutput = request.args.get("finalOutput")
-    scan.delay(repositoryLink,path,repositoryName,finalOutput)
-    return jsonify({'status': 'ok'})
+        repositoryLink = request.args.get("repositoryLink")
+        print(repositoryLink)
+        if validators.url(repositoryLink):
+                path = os.getenv("clonePath")
+                values = repositoryLink.split("/")
+                repositoryName = values[4].split(".")[0]
+                finalOutput = os.getenv("clonePath")
+                scan(repositoryLink,path,repositoryName,finalOutput)
+                resp = Response(str(json.load(open(finalOutput+"/"+repositoryName+".json","r"))))
+                resp.headers['Access-Control-Allow-Origin'] = '*'
+                return resp
+        else:
+                resp = Response('{"error":"invalid git repository given"}')
+                # print(result)
+                # resp.headers['Access-Control-Allow-Origin'] = '*'
+                # resp.headers['Location'] = 'https://scanre.loca.lt/engagement/3'
+                # return resp
+                resp.headers['Access-Control-Allow-Origin'] = '*'
+                return resp
 
-@app.route('/scan',methods=['GET','POST'])
-def add_new_task():
-    repositoryLink = request.args.get("repositoryLink")
-    path = request.args.get("paths")
-    repositoryName = request.args.get("repositoryName")
-    finalOutput = request.args.get("finalOutput")
-    scan.delay(repositoryLink,path,repositoryName,finalOutput,1)
-    return jsonify({'status': 'ok'})
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method=='POST':
+        session['username']=request.form.get('username')
+        return redirect(url_for('index'))
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username',None)
+    return redirect(url_for('index'))
+
+       
 @app.route('/deepScan', methods=['GET','POST'])
 def add_ort():
     repositoryLink = request.args.get("repositoryLink")
@@ -73,13 +83,3 @@ def add_ort():
     deepScan.delay(repositoryLink,path,repositoryName,finalOutput,ortPath)
     return jsonify({'status': 'ok'})
 
-#path for login
-# @app.route('/login', methods=['GET','POST'])
-# def login():
-#     username = request.args.get("username")
-#     password = request.args.get("password")
-#     if username == "admin" and password == "password":
-#         return jsonify({'status': 'ok'})
-#     else:
-#         return jsonify({'status': 'not ok'})
-    
